@@ -1,0 +1,181 @@
+(footprint "BY-G4"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 1.6 3 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "e60632f4-50e8-43d7-9563-7b401d091922")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Soldering_iron_BYG4"
+		(at 1.6 4.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "3ee26a7a-3cf8-46f6-a2b1-bb8e588d37a5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 1.6 3.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a4e8d4c1-666d-4316-aaea-e1e44692e403")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 1.6 3.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ec26f14f-0308-4043-b97d-a2d7c8f35b48")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -8 -3)
+		(end 10.5 2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "Margin")
+		(uuid "8eaf1823-ddda-4fb3-961e-fd1f2067a8d8")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 1.6 6 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "3c34819a-d20c-40ab-b1f4-31e63900d946")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "Cmts.User")
+		(uuid "82acd875-bc99-42b6-8a13-af910d5e07ba")
+		(pts
+			(xy 7.4 0) (xy 0 0)
+		)
+		(height -6.5)
+		(orientation 0)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 0)
+			(precision 4)
+			(suppress_zeroes yes)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "7.4"
+			(at 3.7 -7.6 0)
+			(layer "Cmts.User")
+			(uuid "82acd875-bc99-42b6-8a13-af910d5e07ba")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.1)
+				)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "Cmts.User")
+		(uuid "becd3968-767b-484d-9df4-5f7588b4ae36")
+		(pts
+			(xy 0 0) (xy -4.9 0)
+		)
+		(height -8)
+		(orientation 0)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 0)
+			(precision 4)
+			(suppress_zeroes yes)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "4.9"
+			(at -2.45 -9.1 0)
+			(layer "Cmts.User")
+			(uuid "becd3968-767b-484d-9df4-5f7588b4ae36")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.1)
+				)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -4.9 0)
+		(size 4 4)
+		(drill 1.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "7e05df7a-2a0c-4aa1-bd36-ba38df4b2f09")
+	)
+	(pad "2" thru_hole circle
+		(at 0 0)
+		(size 4 4)
+		(drill 1.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "8b3ff985-8a17-4f49-9f13-1bca5c096e5d")
+	)
+	(pad "3" thru_hole circle
+		(at 7.4 0)
+		(size 4 4)
+		(drill 1.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "e820e9f4-9710-44e6-af2a-989254245703")
+	)
+	(embedded_fonts no)
+)
