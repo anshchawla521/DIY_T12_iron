@@ -378,7 +378,7 @@
         "quality": "basic",
         "rotation_x": 0.0,
         "rotation_y": 0.0,
-        "rotation_z": 0.0,
+        "rotation_z": 180.0,
         "side": "bottom",
         "width": 1920,
         "zoom": 1.0
@@ -419,6 +419,50 @@
         "vrml_relative_paths": false
       },
       "type": "pcb_export_3d"
+    },
+    {
+      "description": "",
+      "id": "096d54b8-14f1-4463-8f01-c5764a5169d8",
+      "settings": {
+        "bom_format_preset_name": "CSV",
+        "bom_preset_name": "",
+        "description": "",
+        "exclude_dnp": false,
+        "field_delimiter": ",",
+        "fields_group_by": [
+          "Value",
+          "Description"
+        ],
+        "fields_labels": [
+          "Reference",
+          "Value",
+          "Footprint",
+          "Datasheet",
+          "Description",
+          "Qty",
+          "#"
+        ],
+        "fields_ordered": [
+          "Reference",
+          "Value",
+          "__Footprint",
+          "__Datasheet",
+          "Description",
+          "${QUANTITY}",
+          "__${ITEM_NUMBER}"
+        ],
+        "filter_string": "",
+        "include_excluded_from_bom": true,
+        "keep_line_breaks": false,
+        "keep_tabs": false,
+        "output_filename": "BOM.csv",
+        "ref_delimiter": ",",
+        "ref_range_delimiter": "",
+        "sort_asc": true,
+        "sort_field": "Reference",
+        "string_delimiter": "\""
+      },
+      "type": "sch_export_bom"
     }
   ],
   "meta": {
@@ -463,6 +507,17 @@
       ],
       "settings": {
         "output_path": "C:\\Users\\HP\\Documents\\KiCad\\Soldering iron 936A + t12 compatible\\files\\3d model\\"
+      },
+      "type": "folder"
+    },
+    {
+      "description": "BOM",
+      "id": "b2364a82-dc88-408a-a775-981eb549f57f",
+      "only": [
+        "096d54b8-14f1-4463-8f01-c5764a5169d8"
+      ],
+      "settings": {
+        "output_path": "C:\\Users\\HP\\Documents\\KiCad\\Soldering iron 936A + t12 compatible\\files\\"
       },
       "type": "folder"
     }

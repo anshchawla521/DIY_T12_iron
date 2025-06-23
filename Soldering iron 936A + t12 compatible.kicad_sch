@@ -5785,6 +5785,12 @@
 		(uuid "428affbd-93d9-4b9d-bfa9-228fd6212233")
 	)
 	(junction
+		(at 138.43 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "440c7c35-ae18-4bf4-859e-1b50e7a31ad4")
+	)
+	(junction
 		(at 132.08 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5915,6 +5921,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9fcc143b-0049-4fde-8d68-33a23b5ce091")
+	)
+	(junction
+		(at 124.46 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a017251c-1a8b-4023-83f5-9e47b6134df3")
 	)
 	(junction
 		(at 127 120.65)
@@ -6591,6 +6603,16 @@
 			(type default)
 		)
 		(uuid "39b2ded8-d2ef-41c1-b2d0-3699817008fa")
+	)
+	(wire
+		(pts
+			(xy 127 104.14) (xy 124.46 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3aebd5fa-56ed-463b-91cb-a6f330fb0692")
 	)
 	(wire
 		(pts
@@ -7274,6 +7296,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 104.14) (xy 138.43 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f06fda3-2940-46a2-b294-52b117c4350c")
+	)
+	(wire
+		(pts
 			(xy 36.83 57.15) (xy 53.34 57.15)
 		)
 		(stroke
@@ -7521,6 +7553,16 @@
 			(type dash)
 		)
 		(uuid "9c02237f-d31b-4175-b96f-8d23f2931d37")
+	)
+	(wire
+		(pts
+			(xy 124.46 104.14) (xy 124.46 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9dd1a655-19d4-414e-91b7-879446c4ca8a")
 	)
 	(wire
 		(pts
@@ -7901,6 +7943,16 @@
 			(type default)
 		)
 		(uuid "c8c6a65e-ea6d-480b-ac39-a5f2c795cc0a")
+	)
+	(wire
+		(pts
+			(xy 134.62 104.14) (xy 138.43 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb89cab5-d644-40f6-9252-7c450beae71a")
 	)
 	(wire
 		(pts
@@ -9233,7 +9285,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "088f407a-c4e2-462e-9e2b-b62f5f70e56c")
 		(property "Reference" "#PWR09"
 			(at 128.27 115.57 0)
@@ -9245,7 +9296,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 128.27 106.68 0)
+			(at 128.016 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11803,6 +11854,75 @@
 			(project "Soldering iron 936A + t12 compatible"
 				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
 					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 130.81 104.14 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6cdf4637-3885-4c20-98da-402c6fd1db41")
+		(property "Reference" "C20"
+			(at 129.032 102.616 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nf"
+			(at 138.43 102.616 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 134.62 103.1748 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 130.81 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 130.81 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b8c492a2-9672-4903-98ff-70f752126457")
+		)
+		(pin "2"
+			(uuid "b0a414c8-c441-440c-b42a-06ac0acf5423")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "C20")
 					(unit 1)
 				)
 			)
