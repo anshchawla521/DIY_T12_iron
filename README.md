@@ -17,3 +17,6 @@ This repository conatins all the files for the DIY soldering iron which is compa
 
 The original Code was written by [HomeMade Projects](https://www.youtube.com/watch?v=tIUbGNTiDyI). Later i modified it to work with the provided PCB + support for more types of Iron's  
 
+## What did i Learn ?
+
+I learnt that most of the iron's use a triac and are AC powere or if they are DC work only upto 24V because making mosfets work/switch 60V is very hard  
