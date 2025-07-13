@@ -7254,16 +7254,6 @@
 		)
 		(uuid "6ec826a6-3197-44e0-bdc9-3097e647acf0")
 	)
-	(text "add smooth startup circuitry + net classes\n"
-		(exclude_from_sim no)
-		(at 251.46 22.098 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "7e1cd89e-7c22-4c91-8503-a92d24d472ba")
-	)
 	(text "MAIN BRAINS"
 		(exclude_from_sim no)
 		(at 66.294 14.986 0)
@@ -7448,6 +7438,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "21795da7-1d72-4291-80c1-85cbf2b96064")
+	)
+	(junction
+		(at 261.62 137.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "24b9d171-ec21-41c2-866d-7d5d5cb1462d")
 	)
 	(junction
 		(at 215.9 160.02)
@@ -7946,16 +7942,8 @@
 		(uuid "00ca417c-cfd0-4511-bcb4-6acc765e71ae")
 	)
 	(no_connect
-		(at 269.24 147.32)
-		(uuid "588555bf-d481-432b-a237-25e8f241dfa6")
-	)
-	(no_connect
 		(at 74.93 19.05)
 		(uuid "71c5ea81-4f86-4fe2-9e33-83740d9fd4a5")
-	)
-	(no_connect
-		(at 269.24 137.16)
-		(uuid "88b2a291-fb0c-424d-8ab2-b20440f1b205")
 	)
 	(wire
 		(pts
@@ -9399,6 +9387,16 @@
 	)
 	(wire
 		(pts
+			(xy 261.62 147.32) (xy 261.62 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a239b8b-af74-4b65-aae3-3570266ba2e5")
+	)
+	(wire
+		(pts
 			(xy 151.13 72.39) (xy 151.13 73.66)
 		)
 		(stroke
@@ -9519,6 +9517,16 @@
 	)
 	(wire
 		(pts
+			(xy 257.81 137.16) (xy 261.62 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74840146-a810-435c-8790-d409a5353b44")
+	)
+	(wire
+		(pts
 			(xy 62.23 161.29) (xy 63.5 161.29)
 		)
 		(stroke
@@ -9616,6 +9624,16 @@
 			(type default)
 		)
 		(uuid "7c108fc3-d589-4316-ace1-446681e2c723")
+	)
+	(wire
+		(pts
+			(xy 261.62 137.16) (xy 269.24 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7dee2040-2181-4482-baad-ecb20f5cfc68")
 	)
 	(wire
 		(pts
@@ -10586,6 +10604,16 @@
 			(type default)
 		)
 		(uuid "cb89cab5-d644-40f6-9252-7c450beae71a")
+	)
+	(wire
+		(pts
+			(xy 269.24 147.32) (xy 261.62 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ccb32a59-6deb-4fcd-87fc-8040cb280f28")
 	)
 	(wire
 		(pts
@@ -16565,6 +16593,72 @@
 			(project "Soldering iron 936A + t12 compatible"
 				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
 					(reference "C20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 257.81 137.16 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6e922efd-1119-4ed0-842c-d3d285ec30ac")
+		(property "Reference" "#PWR057"
+			(at 257.81 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 257.81 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 257.81 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 257.81 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 257.81 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09bf28ab-1029-495e-aa91-5ceb245c39c8")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "#PWR057")
 					(unit 1)
 				)
 			)
