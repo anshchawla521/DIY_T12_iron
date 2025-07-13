@@ -288,7 +288,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U4"
-				(at 0 12.7 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -296,7 +296,7 @@
 				)
 			)
 			(property "Value" "HUSB238"
-				(at 0 10.16 0)
+				(at 0 8.636 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -371,25 +371,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 5.08 0)
-					(length 2.54)
-					(hide yes)
-					(name "V_{DD}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -480,25 +461,6 @@
 						)
 					)
 					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -12.7 180)
-					(length 2.54)
-					(hide yes)
-					(name "V_{BAT}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7476,6 +7438,12 @@
 		(uuid "1a94757e-41c5-46f2-a439-b8661237e089")
 	)
 	(junction
+		(at 118.11 147.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "203b3bed-5e0a-4c8a-9170-072ae107f23d")
+	)
+	(junction
 		(at 17.78 121.92)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7978,10 +7946,6 @@
 		(uuid "00ca417c-cfd0-4511-bcb4-6acc765e71ae")
 	)
 	(no_connect
-		(at 220.98 147.32)
-		(uuid "47808218-0fa4-480f-b38d-fd83dda6c28d")
-	)
-	(no_connect
 		(at 269.24 147.32)
 		(uuid "588555bf-d481-432b-a237-25e8f241dfa6")
 	)
@@ -7992,10 +7956,6 @@
 	(no_connect
 		(at 269.24 137.16)
 		(uuid "88b2a291-fb0c-424d-8ab2-b20440f1b205")
-	)
-	(no_connect
-		(at 220.98 144.78)
-		(uuid "c9663a5a-aebd-48bf-b50f-e53ae21cb195")
 	)
 	(wire
 		(pts
@@ -10517,6 +10477,16 @@
 		)
 		(uuid "c1000795-a1eb-427d-b2c4-dea497c3277a")
 	)
+	(wire
+		(pts
+			(xy 118.11 147.32) (xy 118.11 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c276b41a-74d1-417c-be88-14ad4ec8014c")
+	)
 	(polyline
 		(pts
 			(xy 176.53 165.1) (xy 176.53 198.12)
@@ -10549,7 +10519,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 149.86) (xy 118.11 146.05)
+			(xy 118.11 149.86) (xy 118.11 147.32)
 		)
 		(stroke
 			(width 0)
@@ -11056,6 +11026,16 @@
 			(type default)
 		)
 		(uuid "e6f7646a-c932-4a32-8983-5825176717af")
+	)
+	(wire
+		(pts
+			(xy 116.84 147.32) (xy 118.11 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7c1424c-027d-40d0-b4e7-04af1d5c0f46")
 	)
 	(wire
 		(pts
@@ -11956,6 +11936,70 @@
 			(justify left bottom)
 		)
 		(uuid "faeb7fc6-3043-455c-8454-48e5e6fefd65")
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 116.84 147.32 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cb3a9564-af63-4117-a65a-3a57dc19a425")
+		(property "Netclass" "Power_60V"
+			(at 114.3 146.6215 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Component Class" ""
+			(at -58.42 2.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 106.68 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dd7648ed-4500-4e1f-90f1-312a4f0ea5eb")
+		(property "Netclass" "Power_60V"
+			(at 107.3785 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Component Class" ""
+			(at -68.58 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -21796,9 +21840,6 @@
 		(pin "6"
 			(uuid "34bd7ae3-5ebd-470d-aef0-c0a2aa95a121")
 		)
-		(pin "10"
-			(uuid "24d198f2-fd85-492f-b628-14a3e9a3a10a")
-		)
 		(pin "2"
 			(uuid "6e073c14-d920-4a7b-8302-2f5a007c0b3a")
 		)
@@ -21822,9 +21863,6 @@
 		)
 		(pin "4"
 			(uuid "70d18251-e8d8-4737-9ea9-3b7dbfb66778")
-		)
-		(pin "2"
-			(uuid "145b87dc-d773-4722-9244-b81e4d02bf8f")
 		)
 		(pin "11"
 			(uuid "eda45690-0807-414f-bf75-277ef8884e29")
