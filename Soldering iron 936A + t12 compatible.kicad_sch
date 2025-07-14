@@ -5859,6 +5859,184 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Reference_Voltage:REF3040"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "REF3040"
+				(at 2.54 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ref3033.pdf"
+				(at 2.54 -8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "4.096V 50-ppm/°C Max, 50-μA, CMOS Voltage Reference, SOT-23-3"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "voltage reference"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "REF3040_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.889 -0.635) (xy 0.381 -0.635) (xy -0.254 0.635) (xy -0.889 -0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.254 1.905) (xy -0.254 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.381 1.016) (xy 0.381 0.635) (xy -0.889 0.635) (xy -0.889 0.254)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "REF3040_1_1"
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 2.54)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Regulator_Switching:LM2596S-ADJ"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -7135,6 +7313,18 @@
 		)
 	)
 	(rectangle
+		(start 227.33 16.51)
+		(end 274.32 44.45)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 41e77a6d-bda6-44e5-b3f1-7297f05c4e37)
+	)
+	(rectangle
 		(start 196.85 128.27)
 		(end 283.21 166.37)
 		(stroke
@@ -7306,6 +7496,16 @@
 		)
 		(uuid "afc7a186-d254-4d01-9659-535e467f96f2")
 	)
+	(text "Analog Reference"
+		(exclude_from_sim no)
+		(at 236.474 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "cca2b765-2a35-4107-916e-a1863757571b")
+	)
 	(text "NORMAL POWER INPUT"
 		(exclude_from_sim no)
 		(at 185.166 163.83 0)
@@ -7372,6 +7572,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "00810176-db6d-454d-8e9a-128f111c7964")
+	)
+	(junction
+		(at 250.19 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "039dfadb-ecb5-4b90-90ff-e1e74d7aa320")
 	)
 	(junction
 		(at 237.49 85.09)
@@ -7552,6 +7758,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4552cf8d-3a13-4074-9a72-f0cfb9520e65")
+	)
+	(junction
+		(at 240.03 22.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4757f2da-4b12-4fc5-a72e-7b838db47d7d")
 	)
 	(junction
 		(at 147.32 179.07)
@@ -8357,6 +8569,16 @@
 	)
 	(wire
 		(pts
+			(xy 267.97 38.1) (xy 250.19 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f848fbf-e45b-464a-962b-1ebdd90dba1f")
+	)
+	(wire
+		(pts
 			(xy 87.63 105.41) (xy 88.9 105.41)
 		)
 		(stroke
@@ -8394,6 +8616,16 @@
 			(type default)
 		)
 		(uuid "223dd6a4-6f06-4f31-a56e-99126c1a65b8")
+	)
+	(wire
+		(pts
+			(xy 234.95 38.1) (xy 250.19 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2353cce8-24f0-423c-a225-7ea2271b2e5a")
 	)
 	(wire
 		(pts
@@ -8867,6 +9099,16 @@
 	)
 	(wire
 		(pts
+			(xy 90.17 39.37) (xy 92.71 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "466a03f3-4eaf-4d7e-86a1-ca3470a64922")
+	)
+	(wire
+		(pts
 			(xy 38.1 149.86) (xy 44.45 149.86)
 		)
 		(stroke
@@ -8994,6 +9236,16 @@
 			(type default)
 		)
 		(uuid "4f104594-afba-4788-943e-d20530bf3802")
+	)
+	(wire
+		(pts
+			(xy 260.35 26.67) (xy 260.35 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fbd2ac3-d720-4354-88cc-e8c7808eaa5d")
 	)
 	(wire
 		(pts
@@ -9447,6 +9699,16 @@
 	)
 	(wire
 		(pts
+			(xy 234.95 22.86) (xy 234.95 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6dae7be7-2d4c-42a7-bf6f-f2818132daa3")
+	)
+	(wire
+		(pts
 			(xy 208.28 60.96) (xy 208.28 53.34)
 		)
 		(stroke
@@ -9627,6 +9889,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 22.86) (xy 234.95 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7de13904-2499-4adb-9d28-f344157a9fc7")
+	)
+	(wire
+		(pts
 			(xy 261.62 137.16) (xy 269.24 137.16)
 		)
 		(stroke
@@ -9754,6 +10026,16 @@
 			(type default)
 		)
 		(uuid "883afca8-4801-4485-bb86-6d5be60dfd4b")
+	)
+	(wire
+		(pts
+			(xy 267.97 26.67) (xy 260.35 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88dff280-a115-4732-9511-662993f899d1")
 	)
 	(wire
 		(pts
@@ -10517,6 +10799,16 @@
 	)
 	(wire
 		(pts
+			(xy 250.19 22.86) (xy 240.03 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2d79774-1bed-4349-b75e-dd13f4df94d7")
+	)
+	(wire
+		(pts
 			(xy 237.49 85.09) (xy 248.92 85.09)
 		)
 		(stroke
@@ -10634,6 +10926,16 @@
 			(type dash)
 		)
 		(uuid "cd8f636c-3f0c-4b57-905f-b3e0723604b9")
+	)
+	(wire
+		(pts
+			(xy 234.95 34.29) (xy 234.95 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cdafc604-1dd7-4cbc-b119-5a14d00525bd")
 	)
 	(polyline
 		(pts
@@ -11285,6 +11587,16 @@
 		)
 		(uuid "f9074c2a-5b0b-4eb2-98b2-1f1882a80374")
 	)
+	(wire
+		(pts
+			(xy 267.97 34.29) (xy 267.97 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9128b54-0ebe-468d-9af1-c0b9cab41311")
+	)
 	(polyline
 		(pts
 			(xy 157.48 165.1) (xy 176.53 165.1)
@@ -11424,6 +11736,16 @@
 			(justify left bottom)
 		)
 		(uuid "2f71b74b-5d76-46c6-a7a6-fe00e8a42975")
+	)
+	(label "4.096V_REF"
+		(at 260.35 26.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2fc65fcd-7ff1-434e-b23d-67b57b497f83")
 	)
 	(label "PWM1"
 		(at 80.01 127 0)
@@ -11754,6 +12076,16 @@
 			(justify left bottom)
 		)
 		(uuid "a8e775be-2cd1-4d8e-a511-152a2cd0d213")
+	)
+	(label "4.096V_REF"
+		(at 92.71 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a993ca69-387a-47e9-8233-1a42ea5a51f1")
 	)
 	(label "VIN"
 		(at 97.79 173.99 0)
@@ -15794,6 +16126,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Reference_Voltage:REF3040")
+		(at 252.73 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "53c44dda-1397-4c3d-bdb6-27e2cc94cfd1")
+		(property "Reference" "U6"
+			(at 246.38 29.2099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "REF3040"
+			(at 246.38 31.7499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 252.73 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ref3033.pdf"
+			(at 255.27 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "4.096V 50-ppm/°C Max, 50-μA, CMOS Voltage Reference, SOT-23-3"
+			(at 252.73 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09436531-2ac2-4282-b96e-4cd4cc06b106")
+		)
+		(pin "3"
+			(uuid "aca81f8b-ec00-496b-b4fb-e2c553c268a4")
+		)
+		(pin "2"
+			(uuid "a4598d9c-5352-47cc-9250-ae49f8b5edb3")
+		)
+		(instances
+			(project ""
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D_Zener")
 		(at 44.45 63.5 270)
 		(unit 1)
@@ -16188,6 +16596,136 @@
 			(project "Soldering iron 936A + t12 compatible"
 				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
 					(reference "#PWR050")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 250.19 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5fae995e-e26c-41aa-9a60-fd4dada19f97")
+		(property "Reference" "#PWR058"
+			(at 250.19 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 250.19 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 250.19 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 250.19 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 250.19 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9004df40-1996-491d-83b6-f006c88ed818")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "#PWR058")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 240.03 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6422a818-a920-4d8f-8aa5-10c5ef789f8f")
+		(property "Reference" "#PWR059"
+			(at 240.03 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 242.57 20.828 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 240.03 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5eed8d24-f2d4-4e05-b77e-87f29bd2bb6f")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "#PWR059")
 					(unit 1)
 				)
 			)
@@ -21408,6 +21946,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 234.95 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "be893231-0616-4965-b64f-abd2b496fe98")
+		(property "Reference" "C27"
+			(at 232.156 28.448 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nf"
+			(at 231.648 33.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 235.9152 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 234.95 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 234.95 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3cf88907-de2b-49c2-bd2f-e3231143f748")
+		)
+		(pin "2"
+			(uuid "27ec8ea3-1036-4cdb-8f58-d6c71a06ac24")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "C27")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D_Zener")
 		(at 140.97 77.47 270)
 		(unit 1)
@@ -23614,6 +24221,75 @@
 			(project "Soldering iron 936A + t12 compatible"
 				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
 					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 267.97 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "fa28e965-ec3a-4a35-9218-0bad126a9d52")
+		(property "Reference" "C28"
+			(at 265.176 28.448 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nf"
+			(at 264.668 33.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 268.9352 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 267.97 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 267.97 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a84023d0-4d06-4eaa-a4b2-680c5e1694c2")
+		)
+		(pin "2"
+			(uuid "db8bd03f-8e6f-4d28-bcbf-d2b0a63b11e2")
+		)
+		(instances
+			(project "Soldering iron 936A + t12 compatible"
+				(path "/7b8f23b9-5775-45f1-8dbe-ed5fada41d3e"
+					(reference "C28")
 					(unit 1)
 				)
 			)
