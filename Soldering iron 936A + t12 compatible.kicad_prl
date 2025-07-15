@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 7,
+    "active_layer": 0,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -96,13 +96,13 @@
       112,
       83,
       112,
-      112
+      375
     ],
     "custom_group_rules": [],
     "expanded_rows": [],
     "filter_by_net_name": true,
     "filter_by_netclass": true,
-    "filter_text": "",
+    "filter_text": "NET-(d18",
     "group_by_constraint": false,
     "group_by_netclass": false,
     "show_unconnected_nets": false,
