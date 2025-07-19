@@ -25,6 +25,8 @@
 "J5","mosfet_driver_future_backup","Generic connector, single row, 01x06, script generated","1"
 "J6","OLED","Generic connector, single row, 01x04, script generated","1"
 "J7","USB C BREAKOUT BOARD","Generic connector, single row, 01x08, script generated","1"
+"J8,J10,J11","Conn_01x01_Socket","Generic connector, single row, 01x01, script generated","3"
+"JP1,JP2","SolderJumper_2_Bridged","Solder Jumper, 2-pole, closed/bridged","2"
 "L1","33uH","Inductor","1"
 "L2,L3","100uH","Inductor","2"
 "Q1","IRF9540N","-23A Id, -100V Vds, 117mOhm Rds, P-Channel HEXFET Power MOSFET, TO-220","1"
