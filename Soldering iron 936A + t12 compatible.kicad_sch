@@ -13489,7 +13489,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "10k"
 			(at 29.718 53.34 90)
 			(effects
 				(font
@@ -13787,7 +13787,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Fuse"
+		(property "Description" "Fuse 1A 1206"
 			(at 207.01 120.65 0)
 			(effects
 				(font
@@ -13899,7 +13899,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "10k"
 			(at 29.718 46.99 90)
 			(effects
 				(font
@@ -14020,7 +14020,7 @@
 		(at 219.71 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "07bf6317-6831-4f24-bedd-d3dd3248ed54")
@@ -14289,7 +14289,7 @@
 		(at 170.18 46.99 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "0e5a0adb-8384-41d4-a9d7-6189792e0e0f")
@@ -14302,7 +14302,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "10k"
 			(at 168.148 49.022 90)
 			(effects
 				(font
@@ -15548,7 +15548,7 @@
 		(at 17.78 121.92 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "219e77dc-53f1-4274-815a-5e333dc1d58e")
@@ -15816,7 +15816,7 @@
 		(at 257.81 149.86 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2868f0d2-58dc-46bb-8475-43c94c592007")
@@ -16698,9 +16698,9 @@
 		(at 142.24 182.88 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "3fbd79e7-b047-4132-8b24-f27460b0e7e4")
 		(property "Reference" "D14"
 			(at 139.954 181.864 0)
@@ -17575,7 +17575,7 @@
 		(at 252.73 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(fields_autoplaced yes)
@@ -19201,7 +19201,7 @@
 		(at 95.25 124.46 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "798abcc9-8d70-41e4-b3ab-e002137c7b27")
@@ -20325,7 +20325,7 @@
 		(at 119.38 38.1 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "913748a2-4c90-453d-bc6e-f661c7a75b52")
@@ -20338,7 +20338,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "10k"
 			(at 117.348 36.068 90)
 			(effects
 				(font
@@ -20460,7 +20460,7 @@
 		(at 233.68 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "91ee3074-f6b9-483c-82c6-d676c89f0538")
@@ -21545,7 +21545,7 @@
 		(at 213.36 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "a2219251-3430-44fb-a035-8a58984a377f")
@@ -21753,7 +21753,7 @@
 		(at 233.68 85.09 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "a714b797-8651-4ac3-8fe4-783ba458e62d")
@@ -21888,7 +21888,7 @@
 		(at 124.46 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "a8a52d28-8e77-4fa3-ba23-b38a6ae4a3a7")
@@ -21901,7 +21901,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "10k"
 			(at 122.428 34.798 90)
 			(effects
 				(font
@@ -22972,7 +22972,7 @@
 		(at 151.13 120.65 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "b8e15a07-7b53-4b16-8766-57f3e22750c2")
@@ -23199,7 +23199,7 @@
 		(at 151.13 123.19 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "bbb50dad-c72a-4d03-85c7-144ef13a9689")
@@ -23405,7 +23405,7 @@
 		(at 143.51 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -23739,7 +23739,7 @@
 		(at 234.95 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "be893231-0616-4965-b64f-abd2b496fe98")
@@ -24220,7 +24220,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "5M"
+		(property "Value" "7.5M"
 			(at 23.368 140.97 90)
 			(effects
 				(font
@@ -25045,7 +25045,7 @@
 		(at 205.74 149.86 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "dc939a65-4f2a-4bba-9382-920656542fd8")
@@ -25753,7 +25753,7 @@
 				)
 			)
 		)
-		(property "Value" "10K"
+		(property "Value" "10k"
 			(at 203.2 100.33 90)
 			(effects
 				(font
@@ -26151,7 +26151,7 @@
 		(at 267.97 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "fa28e965-ec3a-4a35-9218-0bad126a9d52")

@@ -22,7 +22,7 @@
 // stabilized.
 //
 // For calibration you need a soldering iron tips thermometer. For best results
-// wait at least three minutes after switching on the soldering station before 
+// wait at least three minutes after switching on the soldering station before
 // you start the calibration process.
 //
 // Controller:  ATmega328p
@@ -50,7 +50,8 @@
 #define ROTARY_TYPE   1         // 0: 2 increments/step; 1: 4 increments/step (default)
 
 // Pins
-#define SENSOR_PIN    A0        // tip temperature sense
+#define SENSOR_PIN_T12    A0        // tip temperature sense
+#define SENSOR_PIN_A1560    A2        // tip temperature sense
 #define VIN_PIN       A1        // input voltage sense
 #define BUZZER_PIN     5        // buzzer
 #define BUTTON_PIN     6        // rotary encoder switch
@@ -87,13 +88,15 @@
 #define PID_ENABLE    false     // enable PID control
 #define BEEP_ENABLE   true      // enable/disable buzzer
 #define MAINSCREEN    0         // type of main screen (0: big numbers; 1: more infos)
+#define TIP_CHANGEOVER_THRESHOLD 650
+#define TIP_A1560_SCALING 1.5
 
 // EEPROM identifier
 #define EEPROM_IDENT   0xE76C   // to identify if EEPROM was written by this program
 
 // Define the aggressive and conservative PID tuning parameters
-double aggKp=11, aggKi=0.5, aggKd=1;
-double consKp=11, consKi=3, consKd=5;
+double aggKp = 11, aggKi = 0.5, aggKd = 1;
+double consKp = 11, consKi = 3, consKd = 5;
 
 // Default values that can be changed by the user and stored in the EEPROM
 uint16_t  DefaultTemp = TEMP_DEFAULT;
@@ -115,13 +118,17 @@ uint8_t   NumberOfTips = 1;
 // Menu items
 const char *SetupItems[]       = { "Setup Menu", "Tip Settings", "Temp Settings",
                                    "Timer Settings", "Control Type", "Main Screen",
-                                   "Buzzer", "Information", "Return" };
-const char *TipItems[]         = { "Tip:", "Change Tip", "Calibrate Tip", 
-                                   "Rename Tip", "Delete Tip", "Add new Tip", "Return" };
-const char *TempItems[]        = { "Temp Settings", "Default Temp", "Sleep Temp", 
-                                   "Boost Temp", "Return" };
-const char *TimerItems[]       = { "Timer Settings", "Sleep Timer", "Off Timer", 
-                                   "Boost Timer", "Return" };
+                                   "Buzzer", "Information", "Return"
+                                 };
+const char *TipItems[]         = { "Tip:", "Change Tip", "Calibrate Tip",
+                                   "Rename Tip", "Delete Tip", "Add new Tip", "Return"
+                                 };
+const char *TempItems[]        = { "Temp Settings", "Default Temp", "Sleep Temp",
+                                   "Boost Temp", "Return"
+                                 };
+const char *TimerItems[]       = { "Timer Settings", "Sleep Timer", "Off Timer",
+                                   "Boost Timer", "Return"
+                                 };
 const char *ControlTypeItems[] = { "Control Type", "Direct", "PID" };
 const char *MainScreenItems[]  = { "Main Screen", "Big Numbers", "More Infos" };
 const char *StoreItems[]       = { "Store Settings ?", "No", "Yes" };
@@ -141,14 +148,14 @@ volatile uint8_t  a0, b0, c0, d0;
 volatile bool     ab0;
 volatile int      count, countMin, countMax, countStep;
 volatile bool     handleMoved;
- 
+
 // Variables for temperature control
 uint16_t  SetTemp, ShowTemp, gap, Step;
 double    Input, Output, Setpoint, RawTemp, CurrentTemp, ChipTemp;
 
 // Variables for voltage readings
 uint16_t  Vcc, Vin;
- 
+
 // State variables
 bool      inSleepMode = false;
 bool      inOffMode   = false;
@@ -156,7 +163,7 @@ bool      inBoostMode = false;
 bool      inCalibMode = false;
 bool      isWorky     = true;
 bool      beepIfWorky = true;
-bool      TipIsPresent= true;
+bool      TipIsPresent = true;
 
 // Timing variables
 uint32_t  sleepmillis;
@@ -168,16 +175,17 @@ uint8_t   SensorCounter = 255;
 
 // Specify variable pointers and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
- 
+
 // Setup u8g object: uncomment according to the OLED used
 //U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0|U8G_I2C_OPT_NO_ACK|U8G_I2C_OPT_FAST);
-U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_FAST|U8G_I2C_OPT_NO_ACK);
+U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_FAST | U8G_I2C_OPT_NO_ACK);
 
 
 
-void setup() { 
+void setup() {
   // set the pin modes
-  pinMode(SENSOR_PIN,   INPUT);
+  pinMode(SENSOR_PIN_T12,   INPUT);
+  pinMode(SENSOR_PIN_A1560,   INPUT);
   pinMode(VIN_PIN,      INPUT);
   pinMode(BUZZER_PIN,   OUTPUT);
   pinMode(CONTROL_PIN,  OUTPUT);
@@ -185,7 +193,7 @@ void setup() {
   pinMode(ROTARY_2_PIN, INPUT_PULLUP);
   pinMode(BUTTON_PIN,   INPUT_PULLUP);
   pinMode(SWITCH_PIN,   INPUT_PULLUP);
-  
+
   analogWrite(CONTROL_PIN, 0);        // this shuts off the heater
   digitalWrite(BUZZER_PIN, LOW);        // must be LOW when buzzer not in use
 
@@ -203,7 +211,7 @@ void setup() {
   if      ( u8g.getMode() == U8G_MODE_R3G3B2 )   u8g.setColorIndex(255);
   else if ( u8g.getMode() == U8G_MODE_GRAY2BIT ) u8g.setColorIndex(3);
   else if ( u8g.getMode() == U8G_MODE_BW )       u8g.setColorIndex(1);
-  else if ( u8g.getMode() == U8G_MODE_HICOLOR )  u8g.setHiColorByRGB(255,255,255);
+  else if ( u8g.getMode() == U8G_MODE_HICOLOR )  u8g.setHiColorByRGB(255, 255, 255);
 
   // get default values from EEPROM
   getEEPROM();
@@ -213,7 +221,12 @@ void setup() {
 
   // read and set current iron temperature
   SetTemp  = DefaultTemp;
-  RawTemp  = denoiseAnalog(SENSOR_PIN);
+  RawTemp  = denoiseAnalog(SENSOR_PIN_T12);
+  if (RawTemp > TIP_CHANGEOVER_THRESHOLD)
+  {
+    // T12 tip not inserted
+    RawTemp  = denoiseAnalog(SENSOR_PIN_A1560)/TIP_A1560_SCALING;
+  }
   ChipTemp = getChipTemp();
   calculateTemp();
 
@@ -225,9 +238,9 @@ void setup() {
   ctrl.SetMode(AUTOMATIC);
 
   // set initial rotary encoder values
-  a0 = PINB & 1; b0 = PIND>>7 & 1; ab0 = (a0 == b0);
+  a0 = PINB & 1; b0 = PIND >> 7 & 1; ab0 = (a0 == b0);
   setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, DefaultTemp);
-  
+
   // reset sleep timer
   sleepmillis = millis();
 
@@ -250,13 +263,13 @@ void loop() {
 void ROTARYCheck() {
   // set working temperature according to rotary encoder value
   SetTemp = getRotary();
-  
+
   // check rotary encoder switch
   uint8_t c = digitalRead(BUTTON_PIN);
   if ( !c && c0 ) {
     beep();
     buttonmillis = millis();
-    while( (!digitalRead(BUTTON_PIN)) && ((millis() - buttonmillis) < 500) );
+    while ( (!digitalRead(BUTTON_PIN)) && ((millis() - buttonmillis) < 500) );
     if ((millis() - buttonmillis) >= 500) SetupScreen();
     else {
       inBoostMode = !inBoostMode;
@@ -295,8 +308,14 @@ void SLEEPCheck() {
 
   // check time passed since the handle was moved
   goneMinutes = (millis() - sleepmillis) / 60000;
-  if ( (!inSleepMode) && (time2sleep > 0) && (goneMinutes >= time2sleep) ) {inSleepMode = true; beep();}
-  if ( (!inOffMode)   && (time2off   > 0) && (goneMinutes >= time2off  ) ) {inOffMode   = true; beep();}
+  if ( (!inSleepMode) && (time2sleep > 0) && (goneMinutes >= time2sleep) ) {
+    inSleepMode = true;
+    beep();
+  }
+  if ( (!inOffMode)   && (time2off   > 0) && (goneMinutes >= time2off  ) ) {
+    inOffMode   = true;
+    beep();
+  }
 }
 
 
@@ -304,14 +323,22 @@ void SLEEPCheck() {
 void SENSORCheck() {
   analogWrite(CONTROL_PIN, 0);              // shut off heater in order to measure temperature
   delayMicroseconds(TIME2SETTLE);             // wait for voltage to settle
-  
-  double temp = denoiseAnalog(SENSOR_PIN);    // read ADC value for temperature
+
+  double temp = denoiseAnalog(SENSOR_PIN_T12);    // read ADC value for temperature
+  if (temp > TIP_CHANGEOVER_THRESHOLD)
+  {
+    // T12 tip not inserted
+    temp  = denoiseAnalog(SENSOR_PIN_A1560)/TIP_A1560_SCALING;
+  }
   uint8_t d = digitalRead(SWITCH_PIN);        // check handle vibration switch
-  if (d != d0) {handleMoved = true; d0 = d;}  // set flag if handle was moved
+  if (d != d0) {
+    handleMoved = true;  // set flag if handle was moved
+    d0 = d;
+  }
   if (! SensorCounter--) Vin = getVIN();      // get Vin every now and then
-  
-  analogWrite(CONTROL_PIN, 255-Output);           // turn on again heater
-  
+
+  analogWrite(CONTROL_PIN, 255 - Output);         // turn on again heater
+
   RawTemp += (temp - RawTemp) * SMOOTHIE;     // stabilize ADC temperature reading
   calculateTemp();                            // calculate real temperature value
 
@@ -337,7 +364,12 @@ void SENSORCheck() {
     ChangeTipScreen();                        // show tip selection screen
     updateEEPROM();                           // update setting in EEPROM
     handleMoved = true;                       // reset all timers
-    RawTemp  = denoiseAnalog(SENSOR_PIN);     // restart temp smooth algorithm
+    RawTemp  = denoiseAnalog(SENSOR_PIN_T12);     // restart temp smooth algorithm
+    if (RawTemp > TIP_CHANGEOVER_THRESHOLD)
+    {
+      // T12 tip not inserted
+      RawTemp  = denoiseAnalog(SENSOR_PIN_A1560)/TIP_A1560_SCALING;
+    }
     c0 = LOW;                                 // switch must be released
     setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, SetTemp);  // reset rotary encoder
   }
@@ -358,27 +390,27 @@ void Thermostat() {
   if      (inOffMode)   Setpoint = 0;
   else if (inSleepMode) Setpoint = SleepTemp;
   else if (inBoostMode) Setpoint = SetTemp + BoostTemp;
-  else                  Setpoint = SetTemp; 
+  else                  Setpoint = SetTemp;
 
   // control the heater (PID or direct)
   gap = abs(Setpoint - CurrentTemp);
   if (PIDenable) {
     Input = CurrentTemp;
     if (gap < 30) ctrl.SetTunings(consKp, consKi, consKd);
-    else ctrl.SetTunings(aggKp, aggKi, aggKd); 
+    else ctrl.SetTunings(aggKp, aggKi, aggKd);
     ctrl.Compute();
   } else {
     // turn on heater if current temperature is below setpoint
     if ((CurrentTemp + 0.5) < Setpoint) Output = 0; else Output = 255;
   }
-  analogWrite(CONTROL_PIN, 255-Output);     // set heater PWM
+  analogWrite(CONTROL_PIN, 255 - Output);   // set heater PWM
 }
 
 
 // creates a short beep on the buzzer
-void beep(){
+void beep() {
   if (beepEnable) {
-    for (uint8_t i=0; i<255; i++) {
+    for (uint8_t i = 0; i < 255; i++) {
       digitalWrite(BUZZER_PIN, HIGH);
       delayMicroseconds(125);
       digitalWrite(BUZZER_PIN, LOW);
@@ -393,7 +425,7 @@ void setRotary(int rmin, int rmax, int rstep, int rvalue) {
   countMin  = rmin << ROTARY_TYPE;
   countMax  = rmax << ROTARY_TYPE;
   countStep = rstep;
-  count     = rvalue << ROTARY_TYPE;  
+  count     = rvalue << ROTARY_TYPE;
 }
 
 
@@ -474,11 +506,11 @@ void MainScreen() {
     u8g.setFont(u8g_font_9x15);
     u8g.setFontPosTop();
     u8g.drawStr( 0, 0,  "SET:");
-    u8g.setPrintPos(40,0);
+    u8g.setPrintPos(40, 0);
     u8g.print(Setpoint, 0);
 
     // draw status of heater
-    u8g.setPrintPos(83,0);
+    u8g.setPrintPos(83, 0);
     if (ShowTemp > 500)    u8g.print(F("ERROR"));
     else if (inOffMode)    u8g.print(F("  OFF"));
     else if (inSleepMode)  u8g.print(F("SLEEP"));
@@ -491,29 +523,29 @@ void MainScreen() {
     if (MainScrType) {
       // draw current tip and input voltage
       float fVin = (float)Vin / 1000;     // convert mv in V
-      u8g.setPrintPos( 0,52); u8g.print(TipName[CurrentTip]);
-      u8g.setPrintPos(83,52); u8g.print(fVin, 1); u8g.print(F("V"));
-      // draw pwm percentage      
-      u8g.setPrintPos(0,32); u8g.print(map(Output, 255, 0, 0, 100)); u8g.print(F("%"));
+      u8g.setPrintPos( 0, 52); u8g.print(TipName[CurrentTip]);
+      u8g.setPrintPos(83, 52); u8g.print(fVin, 1); u8g.print(F("V"));
+      // draw pwm percentage
+      u8g.setPrintPos(0, 32); u8g.print(map(Output, 255, 0, 0, 100)); u8g.print(F("%"));
 
-    // draw PWM
-    u8g.setFont(u8g_font_9x15);
-    u8g.setFontPosTop();
-    u8g.drawStr( 0, 17,  "PWM");            
-          
+      // draw PWM
+      u8g.setFont(u8g_font_9x15);
+      u8g.setFontPosTop();
+      u8g.drawStr( 0, 17,  "PWM");
+
       // draw current temperature
       u8g.setFont(u8g_font_freedoomr25n);
       u8g.setFontPosTop();
-      u8g.setPrintPos(67,22);
+      u8g.setPrintPos(67, 22);
       if (ShowTemp > 500) u8g.print(F("000")); else u8g.print(ShowTemp);
     } else {
       // draw current temperature in big figures
       u8g.setFont(u8g_font_fub42n);
       u8g.setFontPosTop();
-      u8g.setPrintPos(15,20);
+      u8g.setPrintPos(15, 20);
       if (ShowTemp > 500) u8g.print(F("000")); else u8g.print(ShowTemp);
     }
-  } while(u8g.nextPage());
+  } while (u8g.nextPage());
 }
 
 
@@ -524,7 +556,7 @@ void SetupScreen() {
   uint16_t SaveSetTemp = SetTemp;
   uint8_t selection = 0;
   bool repeat = true;
-  
+
   while (repeat) {
     selection = MenuScreen(SetupItems, sizeof(SetupItems), selection);
     switch (selection) {
@@ -537,7 +569,7 @@ void SetupScreen() {
       case 6:   InfoScreen(); break;
       default:  repeat = false; break;
     }
-  }  
+  }
   updateEEPROM();
   handleMoved = true;
   SetTemp = SaveSetTemp;
@@ -548,7 +580,7 @@ void SetupScreen() {
 // tip settings screen
 void TipScreen() {
   uint8_t selection = 0;
-  bool repeat = true;  
+  bool repeat = true;
   while (repeat) {
     selection = MenuScreen(TipItems, sizeof(TipItems), selection);
     switch (selection) {
@@ -566,16 +598,16 @@ void TipScreen() {
 // temperature settings screen
 void TempScreen() {
   uint8_t selection = 0;
-  bool repeat = true;  
+  bool repeat = true;
   while (repeat) {
     selection = MenuScreen(TempItems, sizeof(TempItems), selection);
     switch (selection) {
       case 0:   setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, DefaultTemp);
-                DefaultTemp = InputScreen(DefaultTempItems); break;
+        DefaultTemp = InputScreen(DefaultTempItems); break;
       case 1:   setRotary(20, 200, TEMP_STEP, SleepTemp);
-                SleepTemp = InputScreen(SleepTempItems); break;
+        SleepTemp = InputScreen(SleepTempItems); break;
       case 2:   setRotary(10, 100, TEMP_STEP, BoostTemp);
-                BoostTemp = InputScreen(BoostTempItems); break;
+        BoostTemp = InputScreen(BoostTempItems); break;
       default:  repeat = false; break;
     }
   }
@@ -585,16 +617,16 @@ void TempScreen() {
 // timer settings screen
 void TimerScreen() {
   uint8_t selection = 0;
-  bool repeat = true;  
+  bool repeat = true;
   while (repeat) {
     selection = MenuScreen(TimerItems, sizeof(TimerItems), selection);
     switch (selection) {
       case 0:   setRotary(0, 30, 1, time2sleep);
-                time2sleep = InputScreen(SleepTimerItems); break;
+        time2sleep = InputScreen(SleepTimerItems); break;
       case 1:   setRotary(0, 60, 5, time2off);
-                time2off = InputScreen(OffTimerItems); break;
+        time2off = InputScreen(OffTimerItems); break;
       case 2:   setRotary(0, 180, 10, timeOfBoost);
-                timeOfBoost = InputScreen(BoostTimerItems); break;
+        timeOfBoost = InputScreen(BoostTimerItems); break;
       default:  repeat = false; break;
     }
   }
@@ -616,19 +648,22 @@ uint8_t MenuScreen(const char *Items[], uint8_t numberOfItems, uint8_t selected)
     arrow = constrain(arrow + selected - lastselected, 0, 2);
     lastselected = selected;
     u8g.firstPage();
-      do {
-        u8g.setFont(u8g_font_9x15);
-        u8g.setFontPosTop();
-        u8g.drawStr( 0, 0,  Items[0]);
-        if (isTipScreen) u8g.drawStr( 54, 0,  TipName[CurrentTip]);
-        u8g.drawStr( 0, 16 * (arrow + 1), ">");
-        for (uint8_t i=0; i<3; i++) {
-          uint8_t drawnumber = selected + i + 1 - arrow;
-          if (drawnumber < numberOfItems)
-            u8g.drawStr( 12, 16 * (i + 1), Items[selected + i + 1 - arrow]);
-        }
-      } while(u8g.nextPage());
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+    do {
+      u8g.setFont(u8g_font_9x15);
+      u8g.setFontPosTop();
+      u8g.drawStr( 0, 0,  Items[0]);
+      if (isTipScreen) u8g.drawStr( 54, 0,  TipName[CurrentTip]);
+      u8g.drawStr( 0, 16 * (arrow + 1), ">");
+      for (uint8_t i = 0; i < 3; i++) {
+        uint8_t drawnumber = selected + i + 1 - arrow;
+        if (drawnumber < numberOfItems)
+          u8g.drawStr( 12, 16 * (i + 1), Items[selected + i + 1 - arrow]);
+      }
+    } while (u8g.nextPage());
+    if (lastbutton && digitalRead(BUTTON_PIN)) {
+      delay(10);
+      lastbutton = false;
+    }
   } while (digitalRead(BUTTON_PIN) || lastbutton);
 
   beep();
@@ -643,9 +678,12 @@ void MessageScreen(const char *Items[], uint8_t numberOfItems) {
     u8g.setFont(u8g_font_9x15);
     u8g.setFontPosTop();
     for (uint8_t i = 0; i < numberOfItems; i++) u8g.drawStr( 0, i * 16,  Items[i]);
-  } while(u8g.nextPage());
+  } while (u8g.nextPage());
   do {
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+    if (lastbutton && digitalRead(BUTTON_PIN)) {
+      delay(10);
+      lastbutton = false;
+    }
   } while (digitalRead(BUTTON_PIN) || lastbutton);
   beep();
 }
@@ -659,15 +697,22 @@ uint16_t InputScreen(const char *Items[]) {
   do {
     value = getRotary();
     u8g.firstPage();
-      do {
-        u8g.setFont(u8g_font_9x15);
-        u8g.setFontPosTop();
-        u8g.drawStr( 0, 0,  Items[0]);
-        u8g.setPrintPos(0, 32); u8g.print(">"); u8g.setPrintPos(10, 32);        
-        if (value == 0)  u8g.print(F("Deactivated"));
-        else            {u8g.print(value);u8g.print(" ");u8g.print(Items[1]);}
-      } while(u8g.nextPage());
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+    do {
+      u8g.setFont(u8g_font_9x15);
+      u8g.setFontPosTop();
+      u8g.drawStr( 0, 0,  Items[0]);
+      u8g.setPrintPos(0, 32); u8g.print(">"); u8g.setPrintPos(10, 32);
+      if (value == 0)  u8g.print(F("Deactivated"));
+      else            {
+        u8g.print(value);
+        u8g.print(" ");
+        u8g.print(Items[1]);
+      }
+    } while (u8g.nextPage());
+    if (lastbutton && digitalRead(BUTTON_PIN)) {
+      delay(10);
+      lastbutton = false;
+    }
   } while (digitalRead(BUTTON_PIN) || lastbutton);
 
   beep();
@@ -686,15 +731,18 @@ void InfoScreen() {
     float fVin = (float)Vin / 1000;     // convert mv in V
     float fTmp = getChipTemp();         // read cold junction temperature
     u8g.firstPage();
-      do {
-        u8g.setFont(u8g_font_9x15);
-        u8g.setFontPosTop();
-        u8g.setPrintPos(0,  0); u8g.print(F("Firmware: ")); u8g.print(VERSION);
-        u8g.setPrintPos(0, 16); u8g.print(F("Tmp: "));  u8g.print(fTmp, 1); u8g.print(F(" C"));
-        u8g.setPrintPos(0, 32); u8g.print(F("Vin: "));  u8g.print(fVin, 1); u8g.print(F(" V"));
-        u8g.setPrintPos(0, 48); u8g.print(F("Vcc:  ")); u8g.print(fVcc, 1); u8g.print(F(" V"));
-      } while(u8g.nextPage());
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+    do {
+      u8g.setFont(u8g_font_9x15);
+      u8g.setFontPosTop();
+      u8g.setPrintPos(0,  0); u8g.print(F("Firmware: ")); u8g.print(VERSION);
+      u8g.setPrintPos(0, 16); u8g.print(F("Tmp: "));  u8g.print(fTmp, 1); u8g.print(F(" C"));
+      u8g.setPrintPos(0, 32); u8g.print(F("Vin: "));  u8g.print(fVin, 1); u8g.print(F(" V"));
+      u8g.setPrintPos(0, 48); u8g.print(F("Vcc:  ")); u8g.print(fVcc, 1); u8g.print(F(" V"));
+    } while (u8g.nextPage());
+    if (lastbutton && digitalRead(BUTTON_PIN)) {
+      delay(10);
+      lastbutton = false;
+    }
   } while (digitalRead(BUTTON_PIN) || lastbutton);
 
   beep();
@@ -715,18 +763,21 @@ void ChangeTipScreen() {
     arrow = constrain(arrow + selected - lastselected, 0, 2);
     lastselected = selected;
     u8g.firstPage();
-      do {
-        u8g.setFont(u8g_font_9x15);
-        u8g.setFontPosTop();
-        u8g.drawStr( 0, 0,  F("Select Tip"));
-        u8g.drawStr( 0, 16 * (arrow + 1), ">");
-        for (uint8_t i=0; i<3; i++) {
-          uint8_t drawnumber = selected + i - arrow;
-          if (drawnumber < NumberOfTips)
-            u8g.drawStr( 12, 16 * (i + 1), TipName[selected + i - arrow]);
-        }
-      } while(u8g.nextPage());
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+    do {
+      u8g.setFont(u8g_font_9x15);
+      u8g.setFontPosTop();
+      u8g.drawStr( 0, 0,  F("Select Tip"));
+      u8g.drawStr( 0, 16 * (arrow + 1), ">");
+      for (uint8_t i = 0; i < 3; i++) {
+        uint8_t drawnumber = selected + i - arrow;
+        if (drawnumber < NumberOfTips)
+          u8g.drawStr( 12, 16 * (i + 1), TipName[selected + i - arrow]);
+      }
+    } while (u8g.nextPage());
+    if (lastbutton && digitalRead(BUTTON_PIN)) {
+      delay(10);
+      lastbutton = false;
+    }
   } while (digitalRead(BUTTON_PIN) || lastbutton);
 
   beep();
@@ -736,7 +787,7 @@ void ChangeTipScreen() {
 
 // temperature calibration screen
 void CalibrationScreen() {
-  uint16_t CalTempNew[4]; 
+  uint16_t CalTempNew[4];
   for (uint8_t CalStep = 0; CalStep < 3; CalStep++) {
     SetTemp = CalTemp[CurrentTip][CalStep];
     setRotary(100, 500, 1, SetTemp);
@@ -746,7 +797,7 @@ void CalibrationScreen() {
     do {
       SENSORCheck();      // reads temperature and vibration switch of the iron
       Thermostat();       // heater control
-      
+
       u8g.firstPage();
       do {
         u8g.setFont(u8g_font_9x15);
@@ -760,12 +811,15 @@ void CalibrationScreen() {
           u8g.setPrintPos(0, 32); u8g.print(F("ADC:  ")); u8g.print(uint16_t(RawTemp));
           u8g.setPrintPos(0, 48); u8g.print(F("Please wait..."));
         }
-      } while(u8g.nextPage());
-    if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+      } while (u8g.nextPage());
+      if (lastbutton && digitalRead(BUTTON_PIN)) {
+        delay(10);
+        lastbutton = false;
+      }
     } while (digitalRead(BUTTON_PIN) || lastbutton);
 
-  CalTempNew[CalStep] = getRotary();
-  beep(); delay (10);
+    CalTempNew[CalStep] = getRotary();
+    beep(); delay (10);
   }
 
   analogWrite(CONTROL_PIN, 0);              // shut off heater
@@ -788,19 +842,28 @@ void InputNameScreen() {
     setRotary(31, 96, 1, 65);
     do {
       value = getRotary();
-      if (value == 31) {value = 95; setRotary(31, 96, 1, 95);}
-      if (value == 96) {value = 32; setRotary(31, 96, 1, 32);}
+      if (value == 31) {
+        value = 95;
+        setRotary(31, 96, 1, 95);
+      }
+      if (value == 96) {
+        value = 32;
+        setRotary(31, 96, 1, 32);
+      }
       u8g.firstPage();
-        do {
-          u8g.setFont(u8g_font_9x15);
-          u8g.setFontPosTop();
-          u8g.drawStr( 0, 0,  F("Enter Tip Name"));
-          u8g.setPrintPos(9 * digit, 48); u8g.print(char(94));
-          u8g.setPrintPos(0, 32);
-          for (uint8_t i = 0; i < digit; i++) u8g.print(TipName[CurrentTip][i]);
-          u8g.setPrintPos(9 * digit, 32); u8g.print(char(value));
-        } while(u8g.nextPage());
-      if (lastbutton && digitalRead(BUTTON_PIN)) {delay(10); lastbutton = false;}
+      do {
+        u8g.setFont(u8g_font_9x15);
+        u8g.setFontPosTop();
+        u8g.drawStr( 0, 0,  F("Enter Tip Name"));
+        u8g.setPrintPos(9 * digit, 48); u8g.print(char(94));
+        u8g.setPrintPos(0, 32);
+        for (uint8_t i = 0; i < digit; i++) u8g.print(TipName[CurrentTip][i]);
+        u8g.setPrintPos(9 * digit, 32); u8g.print(char(value));
+      } while (u8g.nextPage());
+      if (lastbutton && digitalRead(BUTTON_PIN)) {
+        delay(10);
+        lastbutton = false;
+      }
     } while (digitalRead(BUTTON_PIN) || lastbutton);
     TipName[CurrentTip][digit] = value;
     beep(); delay (10);
@@ -812,13 +875,17 @@ void InputNameScreen() {
 
 // delete tip screen
 void DeleteTipScreen() {
-  if (NumberOfTips == 1) {MessageScreen(DeleteMessage, sizeof(DeleteMessage));}
+  if (NumberOfTips == 1) {
+    MessageScreen(DeleteMessage, sizeof(DeleteMessage));
+  }
   else if (MenuScreen(SureItems, sizeof(SureItems), 0)) {
-    if (CurrentTip == (NumberOfTips - 1)) {CurrentTip--;}
+    if (CurrentTip == (NumberOfTips - 1)) {
+      CurrentTip--;
+    }
     else {
       for (uint8_t i = CurrentTip; i < (NumberOfTips - 1); i++) {
-        for (uint8_t j = 0; j < TIPNAMELENGTH; j++) TipName[i][j] = TipName[i+1][j];
-        for (uint8_t j = 0; j < 4; j++)             CalTemp[i][j] = CalTemp[i+1][j];
+        for (uint8_t j = 0; j < TIPNAMELENGTH; j++) TipName[i][j] = TipName[i + 1][j];
+        for (uint8_t j = 0; j < 4; j++)             CalTemp[i][j] = CalTemp[i + 1][j];
       }
     }
     NumberOfTips--;
@@ -841,9 +908,9 @@ uint16_t denoiseAnalog (byte port) {
   uint16_t result = 0;
   ADCSRA |= bit (ADEN) | bit (ADIF);    // enable ADC, turn off any pending interrupt
   if (port >= A0) port -= A0;           // set port and
-  ADMUX = (0x0F & port) | bit(REFS0);   // reference to AVcc 
+  ADMUX = (0x0F & port) | bit(REFS0);   // reference to AVcc
   set_sleep_mode (SLEEP_MODE_ADC);      // sleep during sample for noise reduction
-  for (uint8_t i=0; i<32; i++) {        // get 32 readings
+  for (uint8_t i = 0; i < 32; i++) {    // get 32 readings
     sleep_mode();                       // go to sleep while taking ADC sample
     while (bitRead(ADCSRA, ADSC));      // make sure sampling is completed
     result += ADC;                      // add them up
@@ -860,12 +927,12 @@ double getChipTemp() {
   ADMUX = bit (REFS1) | bit (REFS0) | bit (MUX3); // set reference and mux
   delay(20);                            // wait for voltages to settle
   set_sleep_mode (SLEEP_MODE_ADC);      // sleep during sample for noise reduction
-  for (uint8_t i=0; i<32; i++) {        // get 32 readings
+  for (uint8_t i = 0; i < 32; i++) {    // get 32 readings
     sleep_mode();                       // go to sleep while taking ADC sample
     while (bitRead(ADCSRA, ADSC));      // make sure sampling is completed
     result += ADC;                      // add them up
   }
-  bitClear (ADCSRA, ADEN);              // disable ADC  
+  bitClear (ADCSRA, ADEN);              // disable ADC
   result >>= 2;                         // devide by 4
   return ((result - 2594) / 9.76);      // calculate internal temperature in degrees C
 }
@@ -879,14 +946,14 @@ uint16_t getVCC() {
   ADMUX = bit (REFS0) | bit (MUX3) | bit (MUX2) | bit (MUX1);
   delay(1);                             // wait for voltages to settle
   set_sleep_mode (SLEEP_MODE_ADC);      // sleep during sample for noise reduction
-  for (uint8_t i=0; i<16; i++) {        // get 16 readings
+  for (uint8_t i = 0; i < 16; i++) {    // get 16 readings
     sleep_mode();                       // go to sleep while taking ADC sample
     while (bitRead(ADCSRA, ADSC));      // make sure sampling is completed
     result += ADC;                      // add them up
   }
-  bitClear (ADCSRA, ADEN);              // disable ADC  
+  bitClear (ADCSRA, ADEN);              // disable ADC
   result >>= 4;                         // devide by 16
-  return (1125300L / result);           // 1125300 = 1.1 * 1023 * 1000 
+  return (1125300L / result);           // 1125300 = 1.1 * 1023 * 1000
 }
 
 
@@ -905,7 +972,7 @@ EMPTY_INTERRUPT (ADC_vect);             // nothing to be done here
 // Pin change interrupt service routine for rotary encoder
 ISR (PCINT0_vect) {
   uint8_t a = PINB & 1;
-  uint8_t b = PIND>>7 & 1;
+  uint8_t b = PIND >> 7 & 1;
 
   if (a != a0) {              // A changed
     a0 = a;
