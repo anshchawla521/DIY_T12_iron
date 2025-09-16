@@ -13,7 +13,7 @@
         "hpgl_pen_size": 1.016,
         "hpgl_plot_origin": "A3",
         "min_pen_width": 847,
-        "output_dir": "",
+        "output_filename": "",
         "page_size": "auto",
         "pdf_hierarchical_links": true,
         "pdf_metadata": true,
@@ -54,13 +54,10 @@
       "settings": {
         "black_and_white": false,
         "color_theme": "",
-        "crossout_dnp_footprints_on_fab_layers": true,
         "description": "",
         "drawing_sheet": "",
         "drill_shape": "full",
-        "fit_page_to_board": false,
         "gen_mode": "multi",
-        "hide_dnp_footprints_on_fab_layers": false,
         "layers": [
           "In1.Cu",
           "In2.Cu",
@@ -101,14 +98,13 @@
         "mirror": false,
         "negative": false,
         "output_filename": "",
+        "page_size_mode": 0,
         "plot_drawing_sheet": true,
-        "plot_footprint_values": true,
+        "plot_invisible_text": false,
         "plot_pad_numbers": false,
         "plot_ref_des": true,
         "precision": 4,
-        "sketch_dnp_footprints_on_fab_layers": true,
         "sketch_pads_on_fab_layers": false,
-        "subtract_solder_mask_from_silk": false,
         "use_drill_origin": false
       },
       "type": "pcb_export_svg"
@@ -119,13 +115,10 @@
       "settings": {
         "black_and_white": false,
         "color_theme": "",
-        "crossout_dnp_footprints_on_fab_layers": true,
         "description": "",
         "drawing_sheet": "",
         "drill_shape": "full",
-        "fit_page_to_board": false,
         "gen_mode": "multi",
-        "hide_dnp_footprints_on_fab_layers": false,
         "layers": [
           "In1.Cu",
           "In2.Cu",
@@ -166,14 +159,13 @@
         "mirror": false,
         "negative": false,
         "output_filename": "",
+        "page_size_mode": 0,
         "plot_drawing_sheet": true,
-        "plot_footprint_values": true,
+        "plot_invisible_text": false,
         "plot_pad_numbers": false,
         "plot_ref_des": true,
         "precision": 4,
-        "sketch_dnp_footprints_on_fab_layers": true,
         "sketch_pads_on_fab_layers": false,
-        "subtract_solder_mask_from_silk": false,
         "use_drill_origin": false
       },
       "type": "pcb_export_svg"
@@ -182,14 +174,9 @@
       "description": "",
       "id": "5e2bfccb-d933-431a-8ab0-7448b07be425",
       "settings": {
-        "black_and_white": false,
-        "create_gerber_job_file": true,
-        "crossout_dnp_footprints_on_fab_layers": true,
         "description": "",
         "disable_aperture_macros": false,
         "drawing_sheet": "",
-        "drill_shape": "full",
-        "hide_dnp_footprints_on_fab_layers": false,
         "include_netlist_attributes": true,
         "layers": [
           "F.Cu",
@@ -230,17 +217,16 @@
           "B.Mask",
           "Edge.Cuts"
         ],
+        "layers_include_on_all": [],
+        "layers_include_on_all_set": false,
         "layers_to_include_on_all_layers": [],
-        "mirror": false,
-        "negative": false,
         "output_filename": "gerber/",
         "plot_drawing_sheet": false,
         "plot_footprint_values": true,
+        "plot_invisible_text": false,
         "plot_pad_numbers": false,
         "plot_ref_des": true,
         "precision": 5,
-        "sketch_dnp_footprints_on_fab_layers": true,
-        "sketch_pads_on_fab_layers": false,
         "subtract_solder_mask_from_silk": false,
         "use_drill_origin": false,
         "use_protel_file_extension": true,
@@ -390,10 +376,8 @@
         "output_filename": "model.step",
         "overwrite": false,
         "subst_models": true,
-        "use_defined_origin": false,
         "use_drill_origin": false,
         "use_grid_origin": false,
-        "use_pcb_center_origin": false,
         "user_origin.x": 219.456,
         "user_origin.y": 99.6696,
         "vrml_model_dir": "",
@@ -459,7 +443,7 @@
       ],
       "settings": {
         "format": "zip",
-        "output_path": "Z:\\Soldering iron 936A + t12 compatible\\files\\gerber.zip"
+        "output_path": ".\\files\\gerber.zip"
       },
       "type": "archive"
     },
@@ -473,7 +457,7 @@
         "a50a277c-2f6f-468f-9adb-01f426863fbe"
       ],
       "settings": {
-        "output_path": "Z:\\Soldering iron 936A + t12 compatible\\files\\schematic\\"
+        "output_path": ".\\files\\schematic\\"
       },
       "type": "folder"
     },
@@ -486,7 +470,7 @@
         "11a61a70-4965-4664-aa99-8a281a746414"
       ],
       "settings": {
-        "output_path": "Z:\\Soldering iron 936A + t12 compatible\\files\\3d model\\"
+        "output_path": ".\\files\\3d model\\"
       },
       "type": "folder"
     },
@@ -497,7 +481,7 @@
         "096d54b8-14f1-4463-8f01-c5764a5169d8"
       ],
       "settings": {
-        "output_path": "Z:\\Soldering iron 936A + t12 compatible\\files\\"
+        "output_path": ".\\files\\"
       },
       "type": "folder"
     }
