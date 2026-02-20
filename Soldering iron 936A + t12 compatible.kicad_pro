@@ -458,6 +458,7 @@
       "single_global_label": "ignore",
       "unannotated": "error",
       "unconnected_wire_endpoint": "warning",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"
@@ -508,6 +509,9 @@
         "Power_60V"
       ],
       "Net-(D4-A)": [
+        "Power_60V"
+      ],
+      "Net-(D6-K)": [
         "Power_60V"
       ]
     },
@@ -677,6 +681,14 @@
     [
       "7b8f23b9-5775-45f1-8dbe-ed5fada41d3e",
       "Root"
+    ],
+    [
+      "22b2fe40-0aad-46ed-abf2-e79a96a51204",
+      "Auxiliary Power"
+    ],
+    [
+      "47267444-33da-4a1a-8186-03ddc0e1a44d",
+      "Output Stage"
     ]
   ],
   "text_variables": {}
