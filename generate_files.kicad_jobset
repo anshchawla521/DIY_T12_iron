@@ -395,8 +395,7 @@
         "exclude_dnp": false,
         "field_delimiter": ",",
         "fields_group_by": [
-          "Value",
-          "Description"
+          "Value"
         ],
         "fields_labels": [
           "Reference",
